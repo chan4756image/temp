@@ -39,7 +39,7 @@ env:
   CONTAINER_NAME: "hellospring"
   RESOURCE_GROUP: "rg-aks-dev"
   CLUSTER_NAME: "aks-chan4756"
-  DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
+  DEPLOYMENT_MANIFEST_PATH: "manifests/deployment.yaml"
 
 jobs:
   buildImage:
