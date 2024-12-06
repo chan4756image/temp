@@ -7,7 +7,7 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "acrchan4756"
-  CONTAINER_NAME: "hellospring"
+  CONTAINER_NAME: "default"
   RESOURCE_GROUP: "rg-aks-dev"
   CLUSTER_NAME: "aks-chan4756"
   DEPLOYMENT_MANIFEST_PATH: "manifests/deployment.yaml"
