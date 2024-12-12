@@ -44,10 +44,10 @@ spec:
           value: Asia/Seoul
         resources:
           requests:
-            cpu: 50m
-            memory: 64Mi
+            cpu: 200m
+            memory: 150Mi
           limits:
-            cpu: 250m
+            cpu: 400m
             memory: 256Mi
         readinessProbe:
           httpGet:
