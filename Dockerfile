@@ -10,7 +10,7 @@ WORKDIR /
 COPY ./my/target/${JAR_FILE} app.jar
 
 # 애플리케이션이 사용할 포트 8080 노출
-EXPOSE 8080
+EXPOSE 8081
 
 # JAR 파일 실행
 ENTRYPOINT ["java", "-jar", "/app.jar"]
