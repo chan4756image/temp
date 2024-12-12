@@ -35,10 +35,10 @@ spec:
      
           resources:
             requests:
-              cpu: 500m
+              cpu: 200m
               memory: 1Gi
             limits:
-              cpu: 1
+              cpu: 400m
               memory: 2Gi
           env:
             - name: TZ
