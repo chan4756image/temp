@@ -22,6 +22,11 @@ spec:
   selector:
     matchLabels:
       app: app-hellospring
+strategy:
+  type: RollingUpdate  # 롤링 업데이트 전략 설정
+  rollingUpdate:
+    maxUnavailable: 1  # 최대 불가용한 Pod 수
+    maxSurge: 1        # 최대 초과로 배포할 수 있는 Pod 수
   template:
     metadata:
       labels:
@@ -35,11 +40,11 @@ spec:
      
           resources:
             requests:
-              cpu: 200m
-              memory: 1Gi
+              cpu: 100m
+              memory: 256Mi
             limits:
               cpu: 400m
-              memory: 2Gi
+              memory: 1Gi
           env:
             - name: TZ
               value: Asia/Seoul
