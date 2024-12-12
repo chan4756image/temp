@@ -29,8 +29,9 @@ spec:
       labels:
         app: app-hellospring
     spec:
+      # 노드풀명과 노드명을 설정하여 Pod가 특정 노드에 배포되도록 지정
       nodeSelector:
-        kubernetes.io/os: linux
+        kubernetes.io/hostname: aks-nodechan4756-14963050-vmss000000  # 특정 노드로 설정
       containers:
       - name: container-hellospring
         image: acrchan4756.azurecr.io/hellospring:latest  # 또는 특정 태그 사용
