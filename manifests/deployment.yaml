@@ -23,10 +23,7 @@ spec:
     matchLabels:
       app: app-hellospring
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+    type: Recreate  # 배포 전략을 Recreate로 변경
   template:
     metadata:
       labels:
