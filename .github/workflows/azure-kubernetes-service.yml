@@ -82,3 +82,10 @@ jobs:
             ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          strategy: "rolling"  # 롤링 업데이트 전략을 사용하여 배포 안정성 확보
+          max-unavailable: 1
+          max-surge: 1
+
+      - name: Monitor Rollout Status
+        run: |
+          kubectl rollout status deployment/deploy-hellospring --namespace default
