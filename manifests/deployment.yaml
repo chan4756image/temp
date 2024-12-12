@@ -18,35 +18,46 @@ metadata:
   name: deploy-hellospring
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2  # 가용성을 위해 2개 이상의 레플리카 권장
   selector:
     matchLabels:
       app: app-hellospring
-strategy:
-  type: RollingUpdate  # 롤링 업데이트 전략 설정
-  rollingUpdate:
-    maxUnavailable: 1  # 최대 불가용한 Pod 수
-    maxSurge: 1        # 최대 초과로 배포할 수 있는 Pod 수
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: app-hellospring
     spec:
       nodeSelector:
-        "kubernetes.io/os": linux
+        kubernetes.io/os: linux
       containers:
-        - name: container-hellospring
-          image: acrchan4756.azurecr.io/hellospring:latest
-     
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 400m
-              memory: 1Gi
-          env:
-            - name: TZ
-              value: Asia/Seoul
-          ports:
-            - containerPort: 8081
+      - name: container-hellospring
+        image: acrchan4756.azurecr.io/hellospring:latest  # 또는 특정 태그 사용
+        ports:
+        - containerPort: 8081
+        env:
+        - name: TZ
+          value: Asia/Seoul
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        readinessProbe:
+          httpGet:
+            path: /actuator/health  # 스프링부트 헬스 체크 엔드포인트
+            port: 8081
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 15
